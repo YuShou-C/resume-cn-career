@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# 生成产物与个人文件
+outputs/
+问.docx
+
+# 测试缓存
+.pytest_cache/
