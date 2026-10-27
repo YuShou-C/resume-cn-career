@@ -1,6 +1,7 @@
 # resume-cn-career
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![M8ven Score](https://m8ven.ai/badge/mcp/yushou-c-resume-cn-career-nvpiq1?v=8e0510e7ddc6eef5466f0a5d9582f743)](https://m8ven.ai/mcp/yushou-c-resume-cn-career-nvpiq1?s=readme)
 
 中文简历生成与优化 skill，覆盖校招、社招、资深/管理岗、转行与中英双语投递场景。
 
