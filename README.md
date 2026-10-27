@@ -1,6 +1,10 @@
 # resume-cn-career
 
+[![CI](https://github.com/YuShou-C/resume-cn-career/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/YuShou-C/resume-cn-career/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+
+**简体中文** | [English](README.en.md)
 
 中文简历生成与优化 skill，覆盖校招、社招、资深/管理岗、转行与中英双语投递场景。
 
@@ -100,8 +104,14 @@ python -m pip install pytest mcp reportlab
 python -m pytest tests/
 ```
 
+CI（GitHub Actions）会在 Ubuntu 与 Windows 上以 Python 3.10 / 3.11 / 3.12 运行同一套测试。
+
 ## 注意事项
 
 - 简历内容必须真实，不编造经历、学历、证书与指标
 - 导出前建议先按 references/analysis-checklist.md 完成自检
 - 针对每个 JD 产出定制版，不要一版通投
+
+## 许可证
+
+[MIT](LICENSE)

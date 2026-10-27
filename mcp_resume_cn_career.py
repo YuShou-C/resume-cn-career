@@ -21,13 +21,16 @@ import tempfile
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
-from mcp.server.fastmcp import FastMCP
+try:  # MCP SDK 1.x
+    from mcp.server.fastmcp import FastMCP as _Server
+except ImportError:  # MCP SDK 2.x 将 FastMCP 更名为 MCPServer
+    from mcp.server.mcpserver import MCPServer as _Server
 
 
 ROOT = Path(__file__).resolve().parent
 PDF_SCRIPT = ROOT / "scripts" / "generate_resume_pdf.py"
 
-mcp = FastMCP("resume-cn-career")
+mcp = _Server("resume-cn-career")
 
 
 class ResumeSkillError(Exception):
