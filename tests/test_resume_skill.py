@@ -89,3 +89,23 @@ def test_resume_skill_ats_check():
     result = mod.resume_skill(action="ats_check", **_sample())
     assert result["ok"] is True
     assert "keyword_coverage_percent" in result["ats_report"]
+
+
+def test_tools_declare_required_annotations():
+    """目录审核要求每个工具都显式声明四个布尔提示。"""
+    import asyncio
+
+    tools = asyncio.run(mod.mcp.list_tools())
+    assert tools, "MCP 服务器未注册任何工具"
+    for tool in tools:
+        annotations = getattr(tool, "annotations", None)
+        assert annotations is not None, f"{tool.name} 缺少 annotations"
+        for hint in (
+            "read_only_hint",
+            "destructive_hint",
+            "idempotent_hint",
+            "open_world_hint",
+        ):
+            value = getattr(annotations, hint, None)
+            assert isinstance(value, bool), f"{tool.name} 的 {hint} 必须是显式布尔值"
+

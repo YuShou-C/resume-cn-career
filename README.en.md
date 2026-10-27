@@ -84,6 +84,15 @@ The `resume_skill` tool supports four actions:
 | `ats_check` | Static ATS check (score, issues, keyword coverage) |
 | `export_pdf` | Export a PDF with selectable, non-garbled Chinese text |
 
+The tool also declares all four MCP behavior hints (`annotations`), so hosts can warn users before calling it:
+
+| Hint | Value | Rationale |
+| --- | --- | --- |
+| `readOnlyHint` | `false` | `output_json_path` / `output_pdf_path` write to disk |
+| `destructiveHint` | `true` | Existing output files are overwritten |
+| `idempotentHint` | `true` | Repeating the call with the same input yields the same result |
+| `openWorldHint` | `false` | No network access; only local files and local scripts |
+
 ## Input format
 
 - `format`: `chinese` or `bilingual`

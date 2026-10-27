@@ -82,6 +82,15 @@ Claude Desktop 配置示例（`claude_desktop_config.json`）：
 | `ats_check` | 静态 ATS 检查（分数、问题、关键词覆盖率） |
 | `export_pdf` | 导出可复制文本、中文不乱码的 PDF |
 
+工具同时声明了四个行为注解（`annotations`），主机可在调用前据此提示用户：
+
+| 注解 | 值 | 依据 |
+| --- | --- | --- |
+| `readOnlyHint` | `false` | `output_json_path` / `output_pdf_path` 会写盘 |
+| `destructiveHint` | `true` | 输出文件已存在时会被覆盖 |
+| `idempotentHint` | `true` | 相同入参重复调用结果一致，不产生额外影响 |
+| `openWorldHint` | `false` | 不访问网络，仅读写本地文件并调用本地脚本 |
+
 ## 输入格式说明
 
 - `format`: `chinese` 或 `bilingual`

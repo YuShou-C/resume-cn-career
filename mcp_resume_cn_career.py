@@ -26,11 +26,38 @@ try:  # MCP SDK 1.x
 except ImportError:  # MCP SDK 2.x 将 FastMCP 更名为 MCPServer
     from mcp.server.mcpserver import MCPServer as _Server
 
+try:  # MCP SDK 1.8+
+    from mcp.types import ToolAnnotations
+except ImportError:  # 极旧版本 MCP SDK 不支持 tool annotations
+    ToolAnnotations = None  # type: ignore[assignment]
+
 
 ROOT = Path(__file__).resolve().parent
 PDF_SCRIPT = ROOT / "scripts" / "generate_resume_pdf.py"
 
 mcp = _Server("resume-cn-career")
+
+# 工具行为声明：主机可据此在调用前提示用户。
+# - readOnlyHint=False：generate/optimize/ats_check 可落盘 JSON，export_pdf 会写 PDF
+# - destructiveHint=True：输出路径已存在时会被覆盖，属于破坏性更新
+# - idempotentHint=True：相同入参重复调用得到相同结果与文件内容
+# - openWorldHint=False：不访问网络，只读写本地文件并调用本地脚本
+_TOOL_ANNOTATIONS = (
+    ToolAnnotations(
+        readOnlyHint=False,
+        destructiveHint=True,
+        idempotentHint=True,
+        openWorldHint=False,
+    )
+    if ToolAnnotations is not None
+    else None
+)
+
+_TOOL_KWARGS: dict[str, Any] = {
+    "description": "封装中文简历生成、优化、ATS 检查与 PDF 导出的工作流。根据输入的个人信息、目标岗位和 JD 生成结构化简历草稿，并可选择导出 PDF 或执行静态检查。"
+}
+if _TOOL_ANNOTATIONS is not None:
+    _TOOL_KWARGS["annotations"] = _TOOL_ANNOTATIONS
 
 
 class ResumeSkillError(Exception):
@@ -384,7 +411,7 @@ def _export_pdf(resume: dict[str, Any], output_pdf_path: str) -> str:
             pass
 
 
-@mcp.tool(description="封装中文简历生成、优化、ATS 检查与 PDF 导出的工作流。根据输入的个人信息、目标岗位和 JD 生成结构化简历草稿，并可选择导出 PDF 或执行静态检查。")
+@mcp.tool(**_TOOL_KWARGS)
 def resume_skill(
     action: Annotated[
         Literal["generate", "optimize", "ats_check", "export_pdf"],

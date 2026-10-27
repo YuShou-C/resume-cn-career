@@ -111,3 +111,13 @@ python scripts/generate_resume_pdf.py --input examples/bilingual_resume.json --o
 2. 主版本必须为中文，双语场景再补英文版本。
 3. 版式保持 ATS 友好：单栏、标准标题、可复制文本。
 4. 文件名清晰：姓名_岗位_年份.pdf。
+
+## MCP 工具注解
+
+`resume_skill` 显式声明了 MCP 的四个行为提示，主机可在调用前提示用户：
+
+- `readOnlyHint=false`：提供输出路径时会写盘
+- `destructiveHint=true`：输出文件已存在时会被覆盖
+- `idempotentHint=true`：相同入参重复调用结果一致
+- `openWorldHint=false`：不访问网络，仅本地文件与脚本
+
