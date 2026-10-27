@@ -3,6 +3,7 @@
 [![CI](https://github.com/YuShou-C/resume-cn-career/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/YuShou-C/resume-cn-career/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![M8ven Score](https://m8ven.ai/badge/mcp/yushou-c-resume-cn-career-nvpiq1?v=8e0510e7ddc6eef5466f0a5d9582f743)](https://m8ven.ai/mcp/yushou-c-resume-cn-career-nvpiq1?s=readme)
 
 [简体中文](README.md) | **English**
 
